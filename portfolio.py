@@ -293,6 +293,47 @@ st.markdown("""
             grid-template-columns: repeat(2, 1fr);
         }
     }
+
+    /* ---- Force dark text + terracotta glow everywhere, overriding Streamlit's own theme ---- */
+    [data-testid="stMarkdownContainer"],
+    [data-testid="stMarkdownContainer"] p,
+    [data-testid="stMarkdownContainer"] li,
+    [data-testid="stMarkdownContainer"] span,
+    [data-testid="stMarkdownContainer"] strong,
+    [data-testid="stMarkdownContainer"] a,
+    [data-testid="stMarkdownContainer"] summary,
+    [data-testid="stMarkdownContainer"] h1,
+    [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMarkdownContainer"] h3,
+    [data-testid="stMarkdownContainer"] h4 {
+        color: #42382B !important;
+        text-shadow: 0 0 4px rgba(119, 31, 2, 0.45), 0 0 1px rgba(119, 31, 2, 0.6);
+    }
+
+    /* Headings and project titles get a stronger glow to read as the "signature" elements */
+    [data-testid="stMarkdownContainer"] h2,
+    [data-testid="stMarkdownContainer"] h3,
+    [data-testid="stMarkdownContainer"] summary {
+        text-shadow: 0 0 8px rgba(119, 31, 2, 0.7), 0 0 2px rgba(119, 31, 2, 0.9);
+    }
+
+    /* Inline-colored spans (e.g. "Curious", "Skills") keep their own accent color, un-glowed-over */
+    [data-testid="stMarkdownContainer"] span[style*="771F02"] {
+        text-shadow: 0 0 6px rgba(119, 31, 2, 0.5);
+    }
+
+    /* st.info box: match the same dark-on-beige theme */
+    [data-testid="stAlert"] {
+        background-color: #C5C3B9 !important;
+        border: 1px solid #771F02;
+    }
+
+    [data-testid="stAlert"] p,
+    [data-testid="stAlert"] span,
+    [data-testid="stAlert"] div {
+        color: #42382B !important;
+        text-shadow: 0 0 3px rgba(119, 31, 2, 0.4);
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -362,10 +403,10 @@ st.markdown('<h2 class="section-title">Professional <span style="font-weight:700
 st.markdown(
     """
     <div class="icon-grid">
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/c/771F02" alt="C"></div>
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/openjdk/771F02" alt="Java"></div>
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/mysql/771F02" alt="MySQL"></div>
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/python/771F02" alt="Python"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"></div>
     </div>
     """,
     unsafe_allow_html=True
@@ -375,12 +416,12 @@ st.markdown('<h2 class="section-title"><span style="font-weight:700; color: #771
 st.markdown(
     """
     <div class="icon-grid">
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/intellijidea/771F02" alt="IntelliJ IDEA"></div>
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/clion/771F02" alt="CLion"></div>
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/datagrip/771F02" alt="DataGrip"></div>
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/webstorm/771F02" alt="WebStorm"></div>
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/pycharm/771F02" alt="PyCharm"></div>
-        <div class="icon-box"><img src="https://cdn.simpleicons.org/visualstudiocode/771F02" alt="VS Code"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" alt="IntelliJ IDEA"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/clion/clion-original.svg" alt="CLion"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datagrip/datagrip-original.svg" alt="DataGrip"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webstorm/webstorm-original.svg" alt="WebStorm"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/PyCharm/PyCharm-original.svg" alt="PyCharm"></div>
+        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code"></div>
     </div>
     """,
     unsafe_allow_html=True
