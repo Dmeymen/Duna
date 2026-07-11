@@ -1,6 +1,7 @@
 import streamlit as st
 import datetime as date
 import json
+import textwrap
 
 st.set_page_config(
     page_title="Portfolio",
@@ -18,24 +19,24 @@ st.markdown("""
     }
 
     body {
-        background: #42382B;
+        background: #0a0705;
         color: #C5C3B9;
         font-family: Arial, monospace;
         line-height: 1.6;
     }
 
     .main {
-        background-color: #42382B;
+        background-color: #0a0705;
     }
 
     .navbar {
-        background: linear-gradient(90deg, #42382B 0%, #771F02 100%);
+        background: linear-gradient(90deg, #0a0705 0%, #771F02 100%);
         padding: 1rem 1rem;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     }
 
     .hero-section {
-        background: linear-gradient(135deg, #42382B 0%, #771F02 100%);
+        background: linear-gradient(135deg, #0a0705 0%, #771F02 100%);
         padding: 2rem 1rem;
         text-align: center;
         border-radius: 10px;
@@ -97,7 +98,7 @@ st.markdown("""
     }
 
     .project-card {
-        background: #42382B;
+        background: #0a0705;
         border-radius: 10px;
         padding: 2rem;
         margin-bottom: 1.5rem;
@@ -124,7 +125,7 @@ st.markdown("""
     }
 
     .tag {
-        background-color: #42382B;
+        background-color: #0a0705;
         color: #C5C3B9;
         padding: 0.3rem 0.8rem;
         border-radius: 20px;
@@ -140,7 +141,7 @@ st.markdown("""
     }
 
     .skill-category {
-        background-color: #42382B;
+        background-color: #0a0705;
         border-radius: 8px;
         padding: 1.5rem;
         box-shadow: 0 4px 15px #C5C3B9;
@@ -156,7 +157,7 @@ st.markdown("""
     }
 
     .footer {
-        background: linear-gradient(90deg, #42382B 0%, #771F02 100%);
+        background: linear-gradient(90deg, #0a0705 0%, #771F02 100%);
         color: #C5C3B9;
         text-align: center;
         padding: 2rem;
@@ -171,7 +172,7 @@ st.markdown("""
     }
 
     .contact-box {
-        background: #42382B;
+        background: #0a0705;
         border-radius: 10px;
         padding: 2rem;
         box-shadow: 0 4px 15px #C5C3B9;
@@ -204,15 +205,15 @@ st.markdown("""
     [data-testid="stHeader"],
     [data-testid="stMain"],
     [data-testid="stVerticalBlock"] {
-        background: #42382B !important;
-        background-color: #42382B !important;
+        background: #0a0705 !important;
+        background-color: #0a0705 !important;
         color: #C5C3B9;
     }
 
     .navbar,
     .hero-section,
     .footer {
-        background: linear-gradient(90deg, #42382B 0%, #771F02 100%) !important;
+        background: linear-gradient(90deg, #0a0705 0%, #771F02 100%) !important;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
@@ -224,7 +225,7 @@ st.markdown("""
     .project-card,
     .skill-category,
     .contact-box {
-        background: #42382B !important;
+        background: #0a0705 !important;
         color: #C5C3B9;
         box-shadow: 0 4px 15px rgba(96, 62, 38, 0.14);
         border-color: #771F02;
@@ -243,7 +244,7 @@ st.markdown("""
     }
 
     .tag {
-        background-color: #42382B;
+        background-color: #0a0705;
         color: #C5C3B9;
         border: 1px solid #771F02;
     }
@@ -266,7 +267,7 @@ st.markdown("""
     }
 
     .icon-box {
-        background-color: #42382B;
+        background-color: #0a0705;
         border: 2px solid #771F02;
         border-radius: 8px;
         aspect-ratio: 1 / 1;
@@ -325,7 +326,7 @@ st.markdown("""
 
     /* st.info box: match the same dark-on-beige theme */
     [data-testid="stAlert"] {
-        background-color: #42382B !important;
+        background-color: #0a0705 !important;
         border: 1px solid #771F02;
     }
 
@@ -497,18 +498,25 @@ projects = [
     }
 ]
 
+def strip_lines(text):
+    """Remove all leading whitespace from every line so Markdown never
+    mistakes indented HTML for a code block."""
+    return "\n".join(line.strip() for line in text.strip().splitlines())
+
 for project in projects:
     tags_html = "".join([f'<span class="tag">{tech}</span>' for tech in project["tags"]])
-    st.markdown(f"""
-    <details class="project-card">
+    details_html = strip_lines(project["details"])
+    card_html = strip_lines(f"""
+        <details class="project-card">
         <summary>{project['title']}</summary>
         <div class="project-details">
-            <p>{project['description']}</p>
-            <p>{project['details']}</p>
-            <div class="tags">{tags_html}</div>
-            <a href="{project['link']}" class="social-btn" target="_blank">View on GitHub</a>
+        <p>{project['description']}</p>
+        {details_html}
+        <div class="tags">{tags_html}</div>
+        <a href="{project['link']}" class="social-btn" target="_blank">View on GitHub</a>
         </div>
-    </details>
-    """, unsafe_allow_html=True)
+        </details>
+    """)
+    st.markdown(card_html, unsafe_allow_html=True)
 
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
