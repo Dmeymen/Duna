@@ -18,14 +18,14 @@ st.markdown("""
     }
 
     body {
-        background: #C5C3B9;
+        background: #42382B;
         color: #2f241c;
         font-family: Arial, monospace;
         line-height: 1.6;
     }
 
     .main {
-        background-color: #C5C3B9;
+        background-color: #42382B;
     }
 
     .navbar {
@@ -324,7 +324,7 @@ st.markdown("""
 
     /* st.info box: match the same dark-on-beige theme */
     [data-testid="stAlert"] {
-        background-color: #C5C3B9 !important;
+        background-color: #42382B !important;
         border: 1px solid #771F02;
     }
 
