@@ -365,7 +365,7 @@ st.markdown("""
     [data-testid="stMarkdownContainer"],
     [data-testid="stMarkdownContainer"] p,
     [data-testid="stMarkdownContainer"] li,
-    [data-testid="stMarkdownContainer"] span,
+    [data-testid="stMarkdownContainer"] span:not([style*="color"]),
     [data-testid="stMarkdownContainer"] strong,
     [data-testid="stMarkdownContainer"] a,
     [data-testid="stMarkdownContainer"] summary,
@@ -383,7 +383,8 @@ st.markdown("""
         text-shadow: 0 0 8px rgba(119, 31, 2, 0.7), 0 0 2px rgba(119, 31, 2, 0.9);
     }
 
-    [data-testid="stMarkdownContainer"] span[style*="771F02"] {
+       with a subtle matching glow */
+    [data-testid="stMarkdownContainer"] span.accent-highlight {
         color: #771F02 !important;
         text-shadow: 0 0 6px rgba(119, 31, 2, 0.5);
     }
@@ -470,9 +471,9 @@ with about_tab:
                 """
                 <div style="padding-top: 2.5rem;">
                 <p>
-                    <span style="font-weight:700; color: #771F02;">Curious</span> by nature.
-                    <span style="font-weight:700; color: #771F02;">Trained</span> in science.
-                    <span style="font-weight:700; color: #771F02;">Inspired</span> by art.
+                    <span class="accent-highlight" style="font-weight:700; color: #771F02;">Curious</span> by nature.
+                    <span class="accent-highlight" style="font-weight:700; color: #771F02;">Trained</span> in science.
+                    <span class="accent-highlight" style="font-weight:700; color: #771F02;">Inspired</span> by art.
                 </p>
                 <p>
                 Hi Everyone! I'm Duna Meya from Barcelona.
@@ -520,7 +521,7 @@ with about_tab:
         render_profile_photo()
         st.info(
             "Additional information:\n\n"
-            "☕ **Location**: Barcelona, Spain\n\n"
+            "🍪 **Location**: Barcelona, Spain\n\n"
             "🍰 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
             "🧋 **Interest**: Sketching, Travelling, Graphic Design"
         )
@@ -528,7 +529,7 @@ with about_tab:
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
     # Skills Section
-    st.markdown('<h2 class="section-title">Professional <span style="font-weight:700; color: #771F02;">Skills</span></h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title">Professional <span class="accent-highlight" style="font-weight:700; color: #771F02;">Skills</span></h2>', unsafe_allow_html=True)
     render_icon_grid([
         ("assets/c.svg", "C"),
         ("assets/java.svg", "Java"),
@@ -536,7 +537,7 @@ with about_tab:
         ("assets/python.svg", "Python"),
     ])
 
-    st.markdown('<h2 class="section-title"><span style="font-weight:700; color: #771F02;">Tools</span> I Use</h2>', unsafe_allow_html=True)
+    st.markdown('<h2 class="section-title"><span class="accent-highlight" style="font-weight:700; color: #771F02;">Tools</span> I Use</h2>', unsafe_allow_html=True)
     render_icon_grid([
         ("assets/intellij-idea.svg", "IntelliJ IDEA"),
         ("assets/clion.svg", "CLion"),
@@ -555,13 +556,13 @@ with projects_tab:
             "title": "Creation of OS system - The Cytadel",
             "description": "A decentralized distributed application where independent nodes communicate, route data, and manage diplomacy and trade through concurrent processes without relying on a central server.",
             "details": '''
-                <p><span style='font-weight:700; color: #771F02;'>Core Technologies:</span> C, POSIX Threads (pthreads), Sockets (TCP/IP), Binary I/O, IPC (Inter-Process Communication), Makefile, MD5 Verification.</p>
+                <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technologies:</span> C, POSIX Threads (pthreads), Sockets (TCP/IP), Binary I/O, IPC (Inter-Process Communication), Makefile, MD5 Verification.</p>
 
                 <p>The Citadel System is a decentralized, multi-process distributed application designed to establish a network of communication, diplomacy, and trade between independent nodes (representing "Great Houses" or Realms). Operating without a centralized server, each independent node acts as a router capable of handling multihops, dynamically routing files and control data across a network topology based on localized configuration files.</p>
 
                 <p>The primary architecture centers on a Maester (the main node process) and a pool of concurrent, decoupled Envoy assistant processes delegated to manage active network I/O operations without stalling system control.</p>
 
-                <p><span style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
+                <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
                 <ul class="fancy-list">
                     <li>Node Control &amp; Interface: Engineered the Maester main process, incorporating custom binary file parsers for inventory management (stock.db) and a modular, non-blocking case-insensitive command terminal utilizing standard system I/O (read/write system calls only).</li>
                     <li>Dynamic Multi-hop Routing &amp; Networking: Implemented standard network sockets to construct the peer-to-peer network matrix. Built an algorithmic routing subsystem that validates frame checksums and routes communications across neighbor nodes via configured or default paths.</li>
@@ -569,7 +570,7 @@ with projects_tab:
                     <li>Internal Process Concurrency: Scaled the system to delegate dynamic networking pipelines concurrently. Implemented process forking (fork) and robust synchronization metrics to coordinate live communication pipelines between the main node and its array of Envoy subprocesses.</li>
                 </ul>
 
-                <p><span style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
+                <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
                 <ul class="fancy-list">
                     <li>Strict Low-Level Constraints: Developed entirely under strict system requirements prohibiting high-level library functions (such as printf, scanf, or standard wrapper libraries). All user terminal logs and file transfers were executed strictly via low-level read() and write() system calls to emphasize structural core system comprehension.</li>
                     <li>Concurrency &amp; Coordination: Designed complex, multi-threaded inter-process synchronization structures to decouple asynchronous network wait-times from the responsive user shell interface.</li>
@@ -583,13 +584,13 @@ with projects_tab:
             "title": "Object-Oriented Programming - Nude Eye Project",
             "description": "A personal portfolio website built using Streamlit to showcase my skills, projects, and contact information.",
             "details": '''
-                <p><span style='font-weight:700; color: #771F02;'>Core Technologies:</span> Java, JSON, CSV, UML diagrams, Class diagrams, JavaDoc, File I/O, GRASP principles, layered architecture.</p>
+                <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technologies:</span> Java, JSON, CSV, UML diagrams, Class diagrams, JavaDoc, File I/O, GRASP principles, layered architecture.</p>
 
                 <p>The Nude Eye Project is a console-based marketplace for buying and selling eyewear, developed in Java as a Minimum Viable Product (MVP) for Phases 1 and 2. It allows users to register, log in, search products by name or supplier, view their profile with purchase history, and manage a shopping cart with checkout. Data persistence is handled via JSON files (products, suppliers, clients) and CSV files (sales history), with all information read from and written to disk on demand.</p>
 
                 <p>Designed with object-oriented principles, the system follows a layered architecture (presentation, business logic, persistence) and applies key GRASP patterns, such as Information Expert, Controller, and Polymorphism, to ensure low coupling and high cohesion. This design also anticipates future extensions, like varying VAT calculations and new customer types, as outlined for Phases 3 and 4. The project is documented with UML class diagrams and JavaDoc, following a phased delivery schedule.</p>
 
-                <p><span style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
+                <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
                 <ul class="fancy-list">
                     <li>(Design) Create a UML class diagram defining the core domain classes (Product, Supplier, Client, Sale, Cart) and their relationships, applying encapsulation and abstraction.</li>
                     <li>(Implementation) Write the Java code based on the Phase 1 diagram. Implement console menus, JSON/CSV file I/O, and all MVP functionalities (registration, login, product search, profile, cart, checkout). Include JavaDoc documentation.</li>
@@ -597,7 +598,7 @@ with projects_tab:
                     <li>(Implementation) Implement the extended design in Java, integrating the new features into the existing codebase.</li>
                 </ul>
 
-                <p><span style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
+                <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
                 <ul class="fancy-list">
                     <li>Object-oriented design: Full application of encapsulation, abstraction, inheritance, and polymorphism. Classes are designed with single responsibilities and clear boundaries between layers, following a layered architecture that separates Presentation (console menus), Business Logic (services), and Persistence (repositories) — ensuring low coupling and high cohesion.</li>
                     <li>Data persistence: Dual-format storage — JSON for structured entities (products, suppliers, clients) and CSV for flat sales history. All data is read/written on demand, with no unnecessary in-memory caching. File validation uses startup checks that ensure critical files (products.json, providers.json) exist and are well-formed, with graceful degradation when optional files (clients.json, sales.csv) are missing — they are created on first use.</li>
