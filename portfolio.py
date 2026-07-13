@@ -1,4 +1,4 @@
-import streamlit as st
+﻿import streamlit as st
 import datetime as date
 import base64
 import json
@@ -89,11 +89,37 @@ st.markdown("""
         box-shadow: 0 5px 15px #FC801D;
     }
 
+    [data-testid="stTabs"] [data-baseweb="tab-list"] {
+        gap: 0.35rem;
+        border-bottom: 1px solid rgba(119, 31, 2, 0.45);
+    }
+
+    [data-testid="stTabs"] button[role="tab"] {
+        background: transparent;
+        color: #C5C3B9;
+        border: 1px solid rgba(119, 31, 2, 0.7);
+        border-radius: 999px;
+        padding: 0.45rem 1rem;
+        transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    [data-testid="stTabs"] button[role="tab"]:hover {
+        background: rgba(119, 31, 2, 0.12);
+        box-shadow: 0 0 0 1px rgba(119, 31, 2, 0.3);
+        transform: translateY(-1px);
+    }
+
+    [data-testid="stTabs"] button[role="tab"][aria-selected="true"] {
+        background: #771F02;
+        color: #C5C3B9;
+        box-shadow: 0 0 0 1px rgba(197, 195, 185, 0.14);
+    }
+
     .section-title {
         color: #C5C3B9;
         font-size: 2rem;
         font-weight: 700;
-        margin: 3rem 0 2rem 0;
+        margin: 3rem 0 3rem 0;
         padding-bottom: 1rem;
         border-bottom: 3px solid #C5C3B9;
         display: inline-block;
@@ -418,175 +444,179 @@ def render_icon_grid(items: list[tuple[str, str]]) -> None:
     html = '<div class="icon-grid">' + "".join(render_icon_box(path, label) for path, label in items) + "</div>"
     st.markdown(html, unsafe_allow_html=True)
 
-# About section
-st.markdown('<h2 class="section-title">About Me</h2>', unsafe_allow_html=True)
-col1, col2 = st.columns([2, 1])
+about_tab, projects_tab = st.tabs(["About / Skills", "Projects"])
 
-with col1:
-    st.markdown(
-        """
-        <p>
-            <span style="font-weight:700; color: #771F02;">Curious</span> by nature.
-            <span style="font-weight:700; color: #771F02;">Trained</span> in science.
-            <span style="font-weight:700; color: #771F02;">Inspired</span> by art.
-        </p>
-        <p>
-        Hi Everyone! I'm Duna Meya from Barcelona.
-        I'm a junior engineer pursuing a bachelor's degree in AI & Data Science engineering
-        at LaSalle Campus University Ramon Llull.
-        </p>
-        <p>Apart from coding, here are some activities that I love to do:</p>
+with about_tab:
+    # About section
+    st.markdown('<h2 class="section-title">About Me</h2>', unsafe_allow_html=True)
+    col1, col2 = st.columns([2, 1])
 
-        <style>
-        .fancy-list {
-            list-style: none;
-            padding-left: 0;
-            margin: 0;
+    with col1:
+        st.markdown(
+            """
+            <p>
+                <span style="font-weight:700; color: #771F02;">Curious</span> by nature.
+                <span style="font-weight:700; color: #771F02;">Trained</span> in science.
+                <span style="font-weight:700; color: #771F02;">Inspired</span> by art.
+            </p>
+            <p>
+            Hi Everyone! I'm Duna Meya from Barcelona.
+            I'm a junior engineer pursuing a bachelor's degree in AI & Data Science engineering
+            at LaSalle Campus University Ramon Llull.
+            </p>
+            <p>Apart from coding, here are some activities that I love to do:</p>
+
+            <style>
+            .fancy-list {
+                list-style: none;
+                padding-left: 0;
+                margin: 0;
+            }
+            .fancy-list li {
+                position: relative;
+                padding-left: 1.5rem;
+                margin-bottom: 0.5rem;
+                color: #C5C3B9;
+            }
+            .fancy-list li::before {
+                content: "â€¢";
+                position: absolute;
+                left: 0;
+                top: 0;
+                color: #C5C3B9;
+                font-size: 1rem;
+                line-height: 1;
+                text-shadow: 0 0 4px #771F02;
+            }
+            </style>
+
+            <ul class="fancy-list">
+                <li>Travelling</li>
+                <li>Sketching</li>
+                <li>Graphic Design</li>
+            </ul>
+            """,
+            unsafe_allow_html=True
+        )
+
+    with col2:
+        render_profile_photo()
+        st.info(
+            "\tâ˜• **Location**: Barcelona, Spain\n\n"
+            "\tðŸ§‹ **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
+            "\tðŸ§‰ **Interest**: Sketching, Travelling, Graphic Design"
+        )
+
+    st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
+
+    # Skills Section
+    st.markdown('<h2 class="section-title">Professional <span style="font-weight:700; color: #771F02;">Skills</span></h2>', unsafe_allow_html=True)
+    render_icon_grid([
+        ("assets/c.svg", "C"),
+        ("assets/java.svg", "Java"),
+        ("assets/mysql-icon.svg", "MySQL"),
+        ("assets/python.svg", "Python"),
+    ])
+
+    st.markdown('<h2 class="section-title"><span style="font-weight:700; color: #771F02;">Tools</span> I Use</h2>', unsafe_allow_html=True)
+    render_icon_grid([
+        ("assets/intellij-idea.svg", "IntelliJ IDEA"),
+        ("assets/clion.svg", "CLion"),
+        ("assets/datagrip.svg", "DataGrip"),
+        ("assets/webstorm.svg", "WebStorm"),
+        ("assets/pycharm.svg", "PyCharm"),
+        ("assets/visual-studio-code.svg", "VS Code"),
+    ])
+
+with projects_tab:
+    # Project Section
+    st.markdown('<h2 class="section-title">Featured Projects</h2>', unsafe_allow_html=True)
+
+    projects = [
+        {
+            "title": "Creation of OS system - The Cytadel",
+            "description": "A decentralized distributed application where independent nodes communicate, route data, and manage diplomacy and trade through concurrent processes without relying on a central server.",
+            "details": '''
+                <p><span style='font-weight:700; color: #771F02;'>Core Technologies:</span> C, POSIX Threads (pthreads), Sockets (TCP/IP), Binary I/O, IPC (Inter-Process Communication), Makefile, MD5 Verification.</p>
+
+                <p>The Citadel System is a decentralized, multi-process distributed application designed to establish a network of communication, diplomacy, and trade between independent nodes (representing "Great Houses" or Realms). Operating without a centralized server, each independent node acts as a router capable of handling multihops, dynamically routing files and control data across a network topology based on localized configuration files.</p>
+
+                <p>The primary architecture centers on a Maester (the main node process) and a pool of concurrent, decoupled Envoy assistant processes delegated to manage active network I/O operations without stalling system control.</p>
+
+                <p><span style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
+                <ul class="fancy-list">
+                    <li>Node Control &amp; Interface: Engineered the Maester main process, incorporating custom binary file parsers for inventory management (stock.db) and a modular, non-blocking case-insensitive command terminal utilizing standard system I/O (read/write system calls only).</li>
+                    <li>Dynamic Multi-hop Routing &amp; Networking: Implemented standard network sockets to construct the peer-to-peer network matrix. Built an algorithmic routing subsystem that validates frame checksums and routes communications across neighbor nodes via configured or default paths.</li>
+                    <li>Robust Data &amp; File Transfer Protocol: Built a fragmented custom protocol to handle binary file transmission (for political alliance sigils and trade ledger transactions). Incorporated runtime integrity checking using md5sum process integration and precise byte padding.</li>
+                    <li>Internal Process Concurrency: Scaled the system to delegate dynamic networking pipelines concurrently. Implemented process forking (fork) and robust synchronization metrics to coordinate live communication pipelines between the main node and its array of Envoy subprocesses.</li>
+                </ul>
+
+                <p><span style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
+                <ul class="fancy-list">
+                    <li>Strict Low-Level Constraints: Developed entirely under strict system requirements prohibiting high-level library functions (such as printf, scanf, or standard wrapper libraries). All user terminal logs and file transfers were executed strictly via low-level read() and write() system calls to emphasize structural core system comprehension.</li>
+                    <li>Concurrency &amp; Coordination: Designed complex, multi-threaded inter-process synchronization structures to decouple asynchronous network wait-times from the responsive user shell interface.</li>
+                    <li>Fault Tolerance &amp; Reliability: Handled graceful structural exits, memory deallocation, and interrupt signals (CTRL+C). Managed communication edge cases including timeout drops, corrupt frame checksum validation, and node disconnect crash mitigations.</li>
+                </ul>
+            ''',
+            "tags": ["C", "POSIX Threads", "IPC"],
+            "link": "https://github.com/yourusername/the-cytadel"
+        },
+        {
+            "title": "Object-Oriented Programming - Nude Eye Project",
+            "description": "A personal portfolio website built using Streamlit to showcase my skills, projects, and contact information.",
+            "details": '''
+                <p><span style='font-weight:700; color: #771F02;'>Core Technologies:</span> Java, JSON, CSV, UML diagrams, Class diagrams, JavaDoc, File I/O, GRASP principles, layered architecture.</p>
+
+                <p>The Nude Eye Project is a console-based marketplace for buying and selling eyewear, developed in Java as a Minimum Viable Product (MVP) for Phases 1 and 2. It allows users to register, log in, search products by name or supplier, view their profile with purchase history, and manage a shopping cart with checkout. Data persistence is handled via JSON files (products, suppliers, clients) and CSV files (sales history), with all information read from and written to disk on demand.</p>
+
+                <p>Designed with object-oriented principles, the system follows a layered architecture (presentation, business logic, persistence) and applies key GRASP patterns, such as Information Expert, Controller, and Polymorphism, to ensure low coupling and high cohesion. This design also anticipates future extensions, like varying VAT calculations and new customer types, as outlined for Phases 3 and 4. The project is documented with UML class diagrams and JavaDoc, following a phased delivery schedule.</p>
+
+                <p><span style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
+                <ul class="fancy-list">
+                    <li>(Design) Create a UML class diagram defining the core domain classes (Product, Supplier, Client, Sale, Cart) and their relationships, applying encapsulation and abstraction.</li>
+                    <li>(Implementation) Write the Java code based on the Phase 1 diagram. Implement console menus, JSON/CSV file I/O, and all MVP functionalities (registration, login, product search, profile, cart, checkout). Include JavaDoc documentation.</li>
+                    <li>(Design) Extend the class diagram to support new requirements: different product types, customer tiers (B2B, online), and flexible pricing/VAT rules. Apply inheritance and polymorphism to handle variations cleanly.</li>
+                    <li>(Implementation) Implement the extended design in Java, integrating the new features into the existing codebase.</li>
+                </ul>
+
+                <p><span style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
+                <ul class="fancy-list">
+                    <li>Object-oriented design: Full application of encapsulation, abstraction, inheritance, and polymorphism. Classes are designed with single responsibilities and clear boundaries between layers, following a layered architecture that separates Presentation (console menus), Business Logic (services), and Persistence (repositories) â€” ensuring low coupling and high cohesion.</li>
+                    <li>Data persistence: Dual-format storage â€” JSON for structured entities (products, suppliers, clients) and CSV for flat sales history. All data is read/written on demand, with no unnecessary in-memory caching. File validation uses startup checks that ensure critical files (products.json, providers.json) exist and are well-formed, with graceful degradation when optional files (clients.json, sales.csv) are missing â€” they are created on first use.</li>
+                    <li>Scalability for Phases 3 &amp; 4: New product types, customer roles, and pricing rules can be added without rewriting existing code, following the Open/Closed Principle â€” classes are open for extension (new subclasses) but closed for modification (existing code remains untouched), using interfaces and abstract classes liberally.</li>
+                </ul>
+            ''',
+            "tags": ["Java", "JSON", "UML", "Layered Architecture"],
+            "link": "#"
+        },
+        {
+            "title": "Databases creation - Olympics Database",
+            "description": "TODO: add a short description here.",
+            "details": "TODO: add the full write-up here.",
+            "tags": ["MySQL", "Data Cleaning", "Data Analysis"],
+            "link": "#"
         }
-        .fancy-list li {
-            position: relative;
-            padding-left: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #C5C3B9;
-        }
-        .fancy-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: #C5C3B9;
-            font-size: 1rem;
-            line-height: 1;
-            text-shadow: 0 0 4px #771F02;
-        }
-        </style>
+    ]
 
-        <ul class="fancy-list">
-            <li>Travelling</li>
-            <li>Sketching</li>
-            <li>Graphic Design</li>
-        </ul>
-        """,
-        unsafe_allow_html=True
-    )
+    def strip_lines(text):
+        """Remove all leading whitespace from every line so Markdown never
+        mistakes indented HTML for a code block."""
+        return "\n".join(line.strip() for line in text.strip().splitlines())
 
-with col2:
-    render_profile_photo()
-    st.info(
-        "\t☕ **Location**: Barcelona, Spain\n\n"
-        "\t🧋 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
-        "\t🧉 **Interest**: Sketching, Travelling, Graphic Design"
-    )
+    for project in projects:
+        tags_html = "".join([f'<span class="tag">{tech}</span>' for tech in project["tags"]])
+        details_html = strip_lines(project["details"])
+        card_html = strip_lines(f"""
+            <details class="project-card">
+            <summary>{project['title']}</summary>
+            <div class="project-details">
+            <p>{project['description']}</p>
+            {details_html}
+            <div class="tags">{tags_html}</div>
+            <a href="{project['link']}" class="social-btn" target="_blank">View on GitHub</a>
+            </div>
+            </details>
+        """)
+        st.markdown(card_html, unsafe_allow_html=True)
 
-st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
-
-# Skills Section
-st.markdown('<h2 class="section-title">Professional <span style="font-weight:700; color: #771F02;">Skills</span></h2>', unsafe_allow_html=True)
-render_icon_grid([
-    ("assets/c.svg", "C"),
-    ("assets/java.svg", "Java"),
-    ("assets/mysql-icon.svg", "MySQL"),
-    ("assets/python.svg", "Python"),
-])
-
-st.markdown('<h2 class="section-title"><span style="font-weight:700; color: #771F02;">Tools</span> I Use</h2>', unsafe_allow_html=True)
-render_icon_grid([
-    ("assets/intellij-idea.svg", "IntelliJ IDEA"),
-    ("assets/clion.svg", "CLion"),
-    ("assets/datagrip.svg", "DataGrip"),
-    ("assets/webstorm.svg", "WebStorm"),
-    ("assets/pycharm.svg", "PyCharm"),
-    ("assets/visual-studio-code.svg", "VS Code"),
-])
-
-# Project Section
-st.markdown('<h2 class="section-title">Featured Projects</h2>', unsafe_allow_html=True)
-
-projects = [
-    {
-        "title": "Creation of OS system - The Cytadel",
-        "description": "A decentralized distributed application where independent nodes communicate, route data, and manage diplomacy and trade through concurrent processes without relying on a central server.",
-        "details": '''
-            <p><span style='font-weight:700; color: #771F02;'>Core Technologies:</span> C, POSIX Threads (pthreads), Sockets (TCP/IP), Binary I/O, IPC (Inter-Process Communication), Makefile, MD5 Verification.</p>
-
-            <p>The Citadel System is a decentralized, multi-process distributed application designed to establish a network of communication, diplomacy, and trade between independent nodes (representing "Great Houses" or Realms). Operating without a centralized server, each independent node acts as a router capable of handling multihops, dynamically routing files and control data across a network topology based on localized configuration files.</p>
-
-            <p>The primary architecture centers on a Maester (the main node process) and a pool of concurrent, decoupled Envoy assistant processes delegated to manage active network I/O operations without stalling system control.</p>
-
-            <p><span style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
-            <ul class="fancy-list">
-                <li>Node Control &amp; Interface: Engineered the Maester main process, incorporating custom binary file parsers for inventory management (stock.db) and a modular, non-blocking case-insensitive command terminal utilizing standard system I/O (read/write system calls only).</li>
-                <li>Dynamic Multi-hop Routing &amp; Networking: Implemented standard network sockets to construct the peer-to-peer network matrix. Built an algorithmic routing subsystem that validates frame checksums and routes communications across neighbor nodes via configured or default paths.</li>
-                <li>Robust Data &amp; File Transfer Protocol: Built a fragmented custom protocol to handle binary file transmission (for political alliance sigils and trade ledger transactions). Incorporated runtime integrity checking using md5sum process integration and precise byte padding.</li>
-                <li>Internal Process Concurrency: Scaled the system to delegate dynamic networking pipelines concurrently. Implemented process forking (fork) and robust synchronization metrics to coordinate live communication pipelines between the main node and its array of Envoy subprocesses.</li>
-            </ul>
-
-            <p><span style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
-            <ul class="fancy-list">
-                <li>Strict Low-Level Constraints: Developed entirely under strict system requirements prohibiting high-level library functions (such as printf, scanf, or standard wrapper libraries). All user terminal logs and file transfers were executed strictly via low-level read() and write() system calls to emphasize structural core system comprehension.</li>
-                <li>Concurrency &amp; Coordination: Designed complex, multi-threaded inter-process synchronization structures to decouple asynchronous network wait-times from the responsive user shell interface.</li>
-                <li>Fault Tolerance &amp; Reliability: Handled graceful structural exits, memory deallocation, and interrupt signals (CTRL+C). Managed communication edge cases including timeout drops, corrupt frame checksum validation, and node disconnect crash mitigations.</li>
-            </ul>
-        ''',
-        "tags": ["C", "POSIX Threads", "IPC"],
-        "link": "https://github.com/yourusername/the-cytadel"
-    },
-    {
-        "title": "Object-Oriented Programming - Nude Eye Project",
-        "description": "A personal portfolio website built using Streamlit to showcase my skills, projects, and contact information.",
-        "details": '''
-            <p><span style='font-weight:700; color: #771F02;'>Core Technologies:</span> Java, JSON, CSV, UML diagrams, Class diagrams, JavaDoc, File I/O, GRASP principles, layered architecture.</p>
-
-            <p>The Nude Eye Project is a console-based marketplace for buying and selling eyewear, developed in Java as a Minimum Viable Product (MVP) for Phases 1 and 2. It allows users to register, log in, search products by name or supplier, view their profile with purchase history, and manage a shopping cart with checkout. Data persistence is handled via JSON files (products, suppliers, clients) and CSV files (sales history), with all information read from and written to disk on demand.</p>
-
-            <p>Designed with object-oriented principles, the system follows a layered architecture (presentation, business logic, persistence) and applies key GRASP patterns, such as Information Expert, Controller, and Polymorphism, to ensure low coupling and high cohesion. This design also anticipates future extensions, like varying VAT calculations and new customer types, as outlined for Phases 3 and 4. The project is documented with UML class diagrams and JavaDoc, following a phased delivery schedule.</p>
-
-            <p><span style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
-            <ul class="fancy-list">
-                <li>(Design) Create a UML class diagram defining the core domain classes (Product, Supplier, Client, Sale, Cart) and their relationships, applying encapsulation and abstraction.</li>
-                <li>(Implementation) Write the Java code based on the Phase 1 diagram. Implement console menus, JSON/CSV file I/O, and all MVP functionalities (registration, login, product search, profile, cart, checkout). Include JavaDoc documentation.</li>
-                <li>(Design) Extend the class diagram to support new requirements: different product types, customer tiers (B2B, online), and flexible pricing/VAT rules. Apply inheritance and polymorphism to handle variations cleanly.</li>
-                <li>(Implementation) Implement the extended design in Java, integrating the new features into the existing codebase.</li>
-            </ul>
-
-            <p><span style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
-            <ul class="fancy-list">
-                <li>Object-oriented design: Full application of encapsulation, abstraction, inheritance, and polymorphism. Classes are designed with single responsibilities and clear boundaries between layers, following a layered architecture that separates Presentation (console menus), Business Logic (services), and Persistence (repositories) — ensuring low coupling and high cohesion.</li>
-                <li>Data persistence: Dual-format storage — JSON for structured entities (products, suppliers, clients) and CSV for flat sales history. All data is read/written on demand, with no unnecessary in-memory caching. File validation uses startup checks that ensure critical files (products.json, providers.json) exist and are well-formed, with graceful degradation when optional files (clients.json, sales.csv) are missing — they are created on first use.</li>
-                <li>Scalability for Phases 3 &amp; 4: New product types, customer roles, and pricing rules can be added without rewriting existing code, following the Open/Closed Principle — classes are open for extension (new subclasses) but closed for modification (existing code remains untouched), using interfaces and abstract classes liberally.</li>
-            </ul>
-        ''',
-        "tags": ["Java", "JSON", "UML", "Layered Architecture"],
-        "link": "#"
-    },
-    {
-        "title": "Databases creation - Olympics Database",
-        "description": "TODO: add a short description here.",
-        "details": "TODO: add the full write-up here.",
-        "tags": ["MySQL", "Data Cleaning", "Data Analysis"],
-        "link": "#"
-    }
-]
-
-def strip_lines(text):
-    """Remove all leading whitespace from every line so Markdown never
-    mistakes indented HTML for a code block."""
-    return "\n".join(line.strip() for line in text.strip().splitlines())
-
-for project in projects:
-    tags_html = "".join([f'<span class="tag">{tech}</span>' for tech in project["tags"]])
-    details_html = strip_lines(project["details"])
-    card_html = strip_lines(f"""
-        <details class="project-card">
-        <summary>{project['title']}</summary>
-        <div class="project-details">
-        <p>{project['description']}</p>
-        {details_html}
-        <div class="tags">{tags_html}</div>
-        <a href="{project['link']}" class="social-btn" target="_blank">View on GitHub</a>
-        </div>
-        </details>
-    """)
-    st.markdown(card_html, unsafe_allow_html=True)
-
-st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
+    st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
