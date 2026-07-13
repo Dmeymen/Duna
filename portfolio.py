@@ -94,12 +94,18 @@ st.markdown("""
         border-bottom: 1px solid rgba(119, 31, 2, 0.45);
     }
 
+    [data-testid="stTabs"] [data-baseweb="tab-highlight"] {
+        background-color: transparent !important;
+    }
+
     [data-testid="stTabs"] button[role="tab"] {
         background: transparent;
         color: #C5C3B9;
         border: 1px solid rgba(119, 31, 2, 0.7);
         border-radius: 999px;
-        padding: 0.45rem 1rem;
+        padding: 0.7rem 1rem;
+        min-height: 2.6rem;
+        line-height: 1.2;
         transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
 
@@ -197,7 +203,7 @@ st.markdown("""
     .divider {
         height: 2px;
         background: linear-gradient(90deg, transparent, #771F02, transparent);
-        margin: 2rem 0;
+        margin: 2rem 0 3rem 0;
     }
 
     .contact-box {
@@ -502,9 +508,9 @@ with about_tab:
     with col2:
         render_profile_photo()
         st.info(
-            "\tâ˜• **Location**: Barcelona, Spain\n\n"
-            "\tðŸ§‹ **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
-            "\tðŸ§‰ **Interest**: Sketching, Travelling, Graphic Design"
+            "\t ☕ **Location**: Barcelona, Spain\n\n"
+            "\t 🍰 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
+            "\t 🧋 **Interest**: Sketching, Travelling, Graphic Design"
         )
 
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
