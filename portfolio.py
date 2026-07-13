@@ -1,7 +1,9 @@
 import streamlit as st
 import datetime as date
+import base64
 import json
 import textwrap
+from pathlib import Path
 
 st.set_page_config(
     page_title="Portfolio",
@@ -102,12 +104,12 @@ st.markdown("""
         border-radius: 10px;
         padding: 2rem;
         margin-bottom: 1.5rem;
-        box-shadow: 0 4px 15px #C5C3B9;
+        box-shadow: 0 4px 15px #771F02;
         transition: all 0.3s ease;
     }
 
     .project-card:hover {
-        box-shadow: 0 8px 25px #C5C3B9;
+        box-shadow: 0 8px 25px #771F02;
         transform: translateY(-5px);
     }
 
@@ -122,6 +124,7 @@ st.markdown("""
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
+        margin-bottom: 1rem;
     }
 
     .tag {
@@ -290,6 +293,39 @@ st.markdown("""
         object-fit: contain;
     }
 
+    .profile-photo-wrap {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    .profile-photo {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid #771F02;
+        box-shadow: 0 10px 24px rgba(119, 31, 2, 0.35);
+        background: #0a0705;
+    }
+
+    .profile-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .profile-photo.placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #C5C3B9;
+        font-weight: 700;
+        text-align: center;
+        padding: 1rem;
+    }
+
     @media (max-width: 640px) {
         .icon-grid {
             grid-template-columns: repeat(2, 1fr);
@@ -338,6 +374,49 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+
+def render_profile_photo(image_path: str = "assets/profile.jpg", size: int = 220) -> None:
+    path = Path(image_path)
+    if path.exists():
+        image_type = "jpeg" if path.suffix.lower() in {".jpg", ".jpeg"} else path.suffix.lower().lstrip(".") or "png"
+        image_b64 = base64.b64encode(path.read_bytes()).decode("utf-8")
+        st.markdown(
+            f"""
+            <div class="profile-photo-wrap">
+                <div class="profile-photo" style="width:{size}px; height:{size}px;">
+                    <img src="data:image/{image_type};base64,{image_b64}" alt="Profile photo" />
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        st.markdown(
+            f"""
+            <div class="profile-photo-wrap">
+                <div class="profile-photo placeholder" style="width:{size}px; height:{size}px;">
+                    Add<br>assets/profile.jpg
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+
+def render_icon_box(image_path: str, alt_text: str) -> str:
+    path = Path(image_path)
+    if not path.exists():
+        return f'<div class="icon-box"><span style="font-size:0.8rem; text-align:center;">{alt_text}</span></div>'
+
+    mime_type = "image/svg+xml" if path.suffix.lower() == ".svg" else f"image/{path.suffix.lower().lstrip('.') or 'png'}"
+    image_b64 = base64.b64encode(path.read_bytes()).decode("utf-8")
+    return f'<div class="icon-box"><img src="data:{mime_type};base64,{image_b64}" alt="{alt_text}"></div>'
+
+
+def render_icon_grid(items: list[tuple[str, str]]) -> None:
+    html = '<div class="icon-grid">' + "".join(render_icon_box(path, label) for path, label in items) + "</div>"
+    st.markdown(html, unsafe_allow_html=True)
 
 # About section
 st.markdown('<h2 class="section-title">About Me</h2>', unsafe_allow_html=True)
@@ -392,42 +471,33 @@ with col1:
     )
 
 with col2:
+    render_profile_photo()
     st.info(
-        "☕ **Location**: Barcelona, Spain\n\n"
-        "🧋 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
-        "🧉 **Interest**: Sketching, Travelling, Graphic Design"
+        "\t☕ **Location**: Barcelona, Spain\n\n"
+        "\t🧋 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
+        "\t🧉 **Interest**: Sketching, Travelling, Graphic Design"
     )
 
 st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
 # Skills Section
 st.markdown('<h2 class="section-title">Professional <span style="font-weight:700; color: #771F02;">Skills</span></h2>', unsafe_allow_html=True)
-st.markdown(
-    """
-    <div class="icon-grid">
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/c/c-original.svg" alt="C"></div>
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java"></div>
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg" alt="MySQL"></div>
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"></div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+render_icon_grid([
+    ("assets/c.svg", "C"),
+    ("assets/java.svg", "Java"),
+    ("assets/mysql-icon.svg", "MySQL"),
+    ("assets/python.svg", "Python"),
+])
 
 st.markdown('<h2 class="section-title"><span style="font-weight:700; color: #771F02;">Tools</span> I Use</h2>', unsafe_allow_html=True)
-st.markdown(
-    """
-    <div class="icon-grid">
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" alt="IntelliJ IDEA"></div>
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/clion/clion-original.svg" alt="CLion"></div>
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/datagrip/datagrip-original.svg" alt="DataGrip"></div>
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/webstorm/webstorm-original.svg" alt="WebStorm"></div>
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/PyCharm/PyCharm-original.svg" alt="PyCharm"></div>
-        <div class="icon-box"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code"></div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+render_icon_grid([
+    ("assets/intellij-idea.svg", "IntelliJ IDEA"),
+    ("assets/clion.svg", "CLion"),
+    ("assets/datagrip.svg", "DataGrip"),
+    ("assets/webstorm.svg", "WebStorm"),
+    ("assets/pycharm.svg", "PyCharm"),
+    ("assets/visual-studio-code.svg", "VS Code"),
+])
 
 # Project Section
 st.markdown('<h2 class="section-title">Featured Projects</h2>', unsafe_allow_html=True)
