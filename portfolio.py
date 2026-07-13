@@ -103,7 +103,7 @@ st.markdown("""
         color: #C5C3B9;
         border: 1px solid rgba(119, 31, 2, 0.7);
         border-radius: 999px;
-        padding: 1rem 1rem;
+        padding: 1.5rem 1rem;
         min-height: 2.6rem;
         line-height: 1.2;
         transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
@@ -458,47 +458,49 @@ with about_tab:
     with col1:
         st.markdown(
             """
-            <p>
-                <span style="font-weight:700; color: #771F02;">Curious</span> by nature.
-                <span style="font-weight:700; color: #771F02;">Trained</span> in science.
-                <span style="font-weight:700; color: #771F02;">Inspired</span> by art.
-            </p>
-            <p>
-            Hi Everyone! I'm Duna Meya from Barcelona.
-            I'm a junior engineer pursuing a bachelor's degree in AI & Data Science engineering
-            at LaSalle Campus University Ramon Llull.
-            </p>
-            <p>Apart from coding, here are some activities that I love to do:</p>
+            <div style="padding-top: 2rem;">
+                <p>
+                    <span style="font-weight:700; color: #771F02;">Curious</span> by nature.
+                    <span style="font-weight:700; color: #771F02;">Trained</span> in science.
+                    <span style="font-weight:700; color: #771F02;">Inspired</span> by art.
+                </p>
+                <p>
+                Hi Everyone! I'm Duna Meya from Barcelona.
+                I'm a junior engineer pursuing a bachelor's degree in AI & Data Science engineering
+                at LaSalle Campus University Ramon Llull.
+                </p>
+                <p>Apart from coding, here are some activities that I love to do:</p>
 
-            <style>
-            .fancy-list {
-                list-style: none;
-                padding-left: 0;
-                margin: 0;
-            }
-            .fancy-list li {
-                position: relative;
-                padding-left: 1.5rem;
-                margin-bottom: 0.5rem;
-                color: #C5C3B9;
-            }
-            .fancy-list li::before {
-                content: "â€¢";
-                position: absolute;
-                left: 0;
-                top: 0;
-                color: #C5C3B9;
-                font-size: 1rem;
-                line-height: 1;
-                text-shadow: 0 0 4px #771F02;
-            }
-            </style>
+                <style>
+                .fancy-list {
+                    list-style: none;
+                    padding-left: 0;
+                    margin: 0;
+                }
+                .fancy-list li {
+                    position: relative;
+                    padding-left: 1.5rem;
+                    margin-bottom: 0.5rem;
+                    color: #C5C3B9;
+                }
+                .fancy-list li::before {
+                    content: "·";
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    color: #C5C3B9;
+                    font-size: 1rem;
+                    line-height: 1;
+                    text-shadow: 0 0 4px #771F02;
+                }
+                </style>
 
-            <ul class="fancy-list">
-                <li>Travelling</li>
-                <li>Sketching</li>
-                <li>Graphic Design</li>
-            </ul>
+                <ul class="fancy-list">
+                    <li>Travelling</li>
+                    <li>Sketching</li>
+                    <li>Graphic Design</li>
+                </ul>
+            </div>
             """,
             unsafe_allow_html=True
         )
