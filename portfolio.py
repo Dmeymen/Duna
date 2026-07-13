@@ -362,7 +362,6 @@ st.markdown("""
         }
     }
 
-    /* ---- Force dark text + terracotta glow everywhere, overriding Streamlit's own theme ---- */
     [data-testid="stMarkdownContainer"],
     [data-testid="stMarkdownContainer"] p,
     [data-testid="stMarkdownContainer"] li,
@@ -378,30 +377,39 @@ st.markdown("""
         text-shadow: 0 0 4px rgba(119, 31, 2, 0.45), 0 0 1px rgba(119, 31, 2, 0.6);
     }
 
-    /* Headings and project titles get a stronger glow to read as the "signature" elements */
     [data-testid="stMarkdownContainer"] h2,
     [data-testid="stMarkdownContainer"] h3,
     [data-testid="stMarkdownContainer"] summary {
         text-shadow: 0 0 8px rgba(119, 31, 2, 0.7), 0 0 2px rgba(119, 31, 2, 0.9);
     }
 
-    /* Inline-colored spans (e.g. "Curious", "Skills") keep their own accent color, un-glowed-over */
     [data-testid="stMarkdownContainer"] span[style*="771F02"] {
         text-shadow: 0 0 6px rgba(119, 31, 2, 0.5);
     }
 
-    /* st.info box: match the same dark-on-beige theme */
-    [data-testid="stAlert"] {
-        background-color: #0a0705 !important;
-        border: 1px solid #771F02;
-    }
+       [data-testid="stAlert"] {
+           background-color: transparent !important;
+           background: transparent !important;
+           border: 1px solid rgba(119, 31, 2, 0.75);
+           border-radius: 8px;
+           box-shadow: 0 0 18px rgba(119, 31, 2, 0.35), 0 0 40px rgba(119, 31, 2, 0.15), inset 0 0 20px rgba(119, 31, 2, 0.06);
+           transition: box-shadow 0.3s ease;
+       }
 
-    [data-testid="stAlert"] p,
-    [data-testid="stAlert"] span,
-    [data-testid="stAlert"] div {
-        color: #C5C3B9 !important;
-        text-shadow: 0 0 3px rgba(119, 31, 2, 0.4);
-    }
+       [data-testid="stAlert"]:hover {
+           box-shadow: 0 0 22px rgba(119, 31, 2, 0.5), 0 0 55px rgba(119, 31, 2, 0.22), inset 0 0 24px rgba(119, 31, 2, 0.1);
+       }
+
+       [data-testid="stAlert"] > div {
+           background: transparent !important;
+       }
+
+       [data-testid="stAlert"] p,
+       [data-testid="stAlert"] span,
+       [data-testid="stAlert"] div {
+           color: #C5C3B9 !important;
+           text-shadow: 0 0 6px rgba(119, 31, 2, 0.55), 0 0 2px rgba(119, 31, 2, 0.7);
+       }
 </style>
 """, unsafe_allow_html=True)
 
