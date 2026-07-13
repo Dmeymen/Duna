@@ -384,33 +384,33 @@ st.markdown("""
     }
 
     [data-testid="stMarkdownContainer"] span[style*="771F02"] {
-        text-shadow: 0 0 6px rgba(119, 31, 2, 0.5);
         color: #771F02 !important;
+        text-shadow: 0 0 6px rgba(119, 31, 2, 0.5);
     }
 
-       [data-testid="stAlert"] {
-           background-color: transparent !important;
-           background: transparent !important;
-           border: 1px solid rgba(119, 31, 2, 0.75);
-           border-radius: 8px;
-           box-shadow: 0 0 18px rgba(119, 31, 2, 0.35), 0 0 40px rgba(119, 31, 2, 0.15), inset 0 0 20px rgba(119, 31, 2, 0.06);
-           transition: box-shadow 0.3s ease;
-       }
+    [data-testid="stAlert"] {
+        background-color: transparent !important;
+        background: transparent !important;
+        border: 1px solid rgba(119, 31, 2, 0.75);
+        border-radius: 8px;
+        box-shadow: 0 0 18px rgba(119, 31, 2, 0.35), 0 0 40px rgba(119, 31, 2, 0.15), inset 0 0 20px rgba(119, 31, 2, 0.06);
+        transition: box-shadow 0.3s ease;
+    }
 
-       [data-testid="stAlert"]:hover {
-           box-shadow: 0 0 22px rgba(119, 31, 2, 0.5), 0 0 55px rgba(119, 31, 2, 0.22), inset 0 0 24px rgba(119, 31, 2, 0.1);
-       }
+    [data-testid="stAlert"]:hover {
+        box-shadow: 0 0 22px rgba(119, 31, 2, 0.5), 0 0 55px rgba(119, 31, 2, 0.22), inset 0 0 24px rgba(119, 31, 2, 0.1);
+    }
 
-       [data-testid="stAlert"] > div {
-           background: transparent !important;
-       }
+    [data-testid="stAlert"] > div {
+        background: transparent !important;
+    }
 
-       [data-testid="stAlert"] p,
-       [data-testid="stAlert"] span,
-       [data-testid="stAlert"] div {
-           color: #C5C3B9 !important;
-           text-shadow: 0 0 6px rgba(119, 31, 2, 0.55), 0 0 2px rgba(119, 31, 2, 0.7);
-       }
+    [data-testid="stAlert"] p,
+    [data-testid="stAlert"] span,
+    [data-testid="stAlert"] div {
+        color: #C5C3B9 !important;
+        text-shadow: 0 0 6px rgba(119, 31, 2, 0.55), 0 0 2px rgba(119, 31, 2, 0.7);
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -518,12 +518,12 @@ with about_tab:
 
     with col2:
         render_profile_photo()
-         st.info(
-            "Additional Information: \n\n"
+        st.info(
+            "Additional information:\n\n"
             "☕ **Location**: Barcelona, Spain\n\n"
             "🍰 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
             "🧋 **Interest**: Sketching, Travelling, Graphic Design"
-         )
+        )
 
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
@@ -599,9 +599,9 @@ with projects_tab:
 
                 <p><span style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
                 <ul class="fancy-list">
-                    <li>Object-oriented design: Full application of encapsulation, abstraction, inheritance, and polymorphism. Classes are designed with single responsibilities and clear boundaries between layers, following a layered architecture that separates Presentation (console menus), Business Logic (services), and Persistence (repositories) â€” ensuring low coupling and high cohesion.</li>
-                    <li>Data persistence: Dual-format storage â€” JSON for structured entities (products, suppliers, clients) and CSV for flat sales history. All data is read/written on demand, with no unnecessary in-memory caching. File validation uses startup checks that ensure critical files (products.json, providers.json) exist and are well-formed, with graceful degradation when optional files (clients.json, sales.csv) are missing â€” they are created on first use.</li>
-                    <li>Scalability for Phases 3 &amp; 4: New product types, customer roles, and pricing rules can be added without rewriting existing code, following the Open/Closed Principle â€” classes are open for extension (new subclasses) but closed for modification (existing code remains untouched), using interfaces and abstract classes liberally.</li>
+                    <li>Object-oriented design: Full application of encapsulation, abstraction, inheritance, and polymorphism. Classes are designed with single responsibilities and clear boundaries between layers, following a layered architecture that separates Presentation (console menus), Business Logic (services), and Persistence (repositories) — ensuring low coupling and high cohesion.</li>
+                    <li>Data persistence: Dual-format storage — JSON for structured entities (products, suppliers, clients) and CSV for flat sales history. All data is read/written on demand, with no unnecessary in-memory caching. File validation uses startup checks that ensure critical files (products.json, providers.json) exist and are well-formed, with graceful degradation when optional files (clients.json, sales.csv) are missing — they are created on first use.</li>
+                    <li>Scalability for Phases 3 &amp; 4: New product types, customer roles, and pricing rules can be added without rewriting existing code, following the Open/Closed Principle — classes are open for extension (new subclasses) but closed for modification (existing code remains untouched), using interfaces and abstract classes liberally.</li>
                 </ul>
             ''',
             "tags": ["Java", "JSON", "UML", "Layered Architecture"],
