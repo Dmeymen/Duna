@@ -103,7 +103,7 @@ st.markdown("""
         color: #C5C3B9;
         border: 1px solid rgba(119, 31, 2, 0.7);
         border-radius: 999px;
-        padding: 0.7rem 1rem;
+        padding: 1rem 1rem;
         min-height: 2.6rem;
         line-height: 1.2;
         transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
@@ -127,8 +127,6 @@ st.markdown("""
         font-weight: 700;
         margin: 3rem 0 3rem 0;
         padding-bottom: 1rem;
-        border-bottom: 3px solid #C5C3B9;
-        display: inline-block;
     }
 
     .project-card {
@@ -508,9 +506,9 @@ with about_tab:
     with col2:
         render_profile_photo()
         st.info(
-            "\t ☕ **Location**: Barcelona, Spain\n\n"
-            "\t 🍰 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
-            "\t 🧋 **Interest**: Sketching, Travelling, Graphic Design"
+            "☕ **Location**: Barcelona, Spain\n\n"
+            "🍰 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
+            "🧋 **Interest**: Sketching, Travelling, Graphic Design"
         )
 
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
