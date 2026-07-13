@@ -385,6 +385,7 @@ st.markdown("""
 
     [data-testid="stMarkdownContainer"] span[style*="771F02"] {
         text-shadow: 0 0 6px rgba(119, 31, 2, 0.5);
+        color: #771F02 !important;
     }
 
        [data-testid="stAlert"] {
@@ -517,11 +518,12 @@ with about_tab:
 
     with col2:
         render_profile_photo()
-        st.info(
+         st.info(
+            "Additional Information: \n\n"
             "☕ **Location**: Barcelona, Spain\n\n"
             "🍰 **Education**: Bachelor's degree in AI & Data Science engineering at LaSalle Campus University Ramon Llull\n\n"
             "🧋 **Interest**: Sketching, Travelling, Graphic Design"
-        )
+         )
 
     st.markdown('<div class="divider"></div>', unsafe_allow_html=True)
 
