@@ -103,7 +103,7 @@ st.markdown("""
         color: #C5C3B9;
         border: 1px solid rgba(119, 31, 2, 0.7);
         border-radius: 999px;
-        padding: 2rem 1rem;
+        padding: 0.75rem 1rem;
         min-height: 2.4rem;
         line-height: 1.2;
         transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
@@ -453,13 +453,13 @@ about_tab, projects_tab = st.tabs(["About / Skills", "Projects"])
 with about_tab:
     # About section
     st.markdown('<h2 class="section-title">About Me</h2>', unsafe_allow_html=True)
-    col1, col2 = st.columns([2, 1])
+    col1, col2 = st.columns([1.5, 1])
 
     with col1:
         st.markdown(
             textwrap.dedent(
                 """
-                <div style="padding-top: 2rem;">
+                <div style="padding-top: 2.5rem;">
                 <p>
                     <span style="font-weight:700; color: #771F02;">Curious</span> by nature.
                     <span style="font-weight:700; color: #771F02;">Trained</span> in science.
