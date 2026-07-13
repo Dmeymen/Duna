@@ -103,8 +103,8 @@ st.markdown("""
         color: #C5C3B9;
         border: 1px solid rgba(119, 31, 2, 0.7);
         border-radius: 999px;
-        padding: 1.5rem 1rem;
-        min-height: 2.6rem;
+        padding: 2rem 1rem;
+        min-height: 2.4rem;
         line-height: 1.2;
         transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
     }
@@ -457,8 +457,9 @@ with about_tab:
 
     with col1:
         st.markdown(
-            """
-            <div style="padding-top: 2rem;">
+            textwrap.dedent(
+                """
+                <div style="padding-top: 2rem;">
                 <p>
                     <span style="font-weight:700; color: #771F02;">Curious</span> by nature.
                     <span style="font-weight:700; color: #771F02;">Trained</span> in science.
@@ -500,8 +501,9 @@ with about_tab:
                     <li>Sketching</li>
                     <li>Graphic Design</li>
                 </ul>
-            </div>
-            """,
+                </div>
+                """
+            ),
             unsafe_allow_html=True
         )
 
