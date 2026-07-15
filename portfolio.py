@@ -480,38 +480,12 @@ with about_tab:
                 I'm a junior engineer pursuing a bachelor's degree in AI & Data Science engineering
                 at LaSalle Campus University Ramon Llull.
                 </p>
-                <p>Apart from coding, here are some activities that I love to do:</p>
-
-                <style>
-                .fancy-list {
-                    list-style: none;
-                    padding-left: 0;
-                    margin: 0;
-                }
-                .fancy-list li {
-                    position: relative;
-                    padding-left: 1.5rem;
-                    margin-bottom: 0.5rem;
-                    color: #C5C3B9;
-                }
-                .fancy-list li::before {
-                    content: "·";
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    color: #C5C3B9;
-                    font-size: 1rem;
-                    line-height: 1;
-                    text-shadow: 0 0 4px #771F02;
-                }
-                </style>
-
-                <ul class="fancy-list">
-                    <li>Travelling</li>
-                    <li>Sketching</li>
-                    <li>Graphic Design</li>
-                </ul>
+                <div style="margin-top: 1rem;">
+                    <a href="assets/CV_Duna.pdf" download class="social-btn" style="text-decoration: none; display: inline-flex;">
+                        Download my CV
+                    </a>
                 </div>
+
                 """
             ),
             unsafe_allow_html=True
@@ -582,7 +556,7 @@ with projects_tab:
         },
         {
             "title": "Object-Oriented Programming - Nude Eye Project",
-            "description": "A personal portfolio website built using Streamlit to showcase my skills, projects, and contact information.",
+            "description": "A console-based marketplace to purchase items, designed for object-oriented programming principles, data persistence, and layered architecture, with future extensibility in mind.",
             "details": '''
                 <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technologies:</span> Java, JSON, CSV, UML diagrams, Class diagrams, JavaDoc, File I/O, GRASP principles, layered architecture.</p>
 
@@ -610,9 +584,57 @@ with projects_tab:
         },
         {
             "title": "Databases creation - Olympics Database",
-            "description": "TODO: add a short description here.",
-            "details": "TODO: add the full write-up here.",
+            "description": "Design and implementation of a relational database for storing and managing Olympic Games data.",
+            "details": '''
+               <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technologies:</span> MySQL, Entity Model, Relational Model, Data cleaning, Database design, Query design.</p>
+
+               <p>The Olympics Database is a relational database designed to store and manage data for the Olympic Games. It includes tables for athletes, events, countries, and results, with relationships defined to ensure data integrity and facilitate complex queries.</p>
+
+               <p>The project is designed in three main stages, with each stage building upon the previous one to deliver a comprehensive solution with proper database design meant for scalability.</p>
+
+               <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
+               <ul class="fancy-list">
+                   <li>Stage 1: Define relationships, applying encapsulation and abstraction, create the models of the data (both entity and relational models).</li>
+                   <li>Stage 2: Write the SQL scripts to create the database schema and populate it with initial data.</li>
+                   <li>Stage 3: Implement the application logic to interact with the database, including queries, verifications and triggers.</li>
+               </ul>
+
+               <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
+               <ul class="fancy-list">
+                    <li>Data cleaning for Oracle use: Managing data inconsistencies and ensuring data quality for Oracle database compatibility, this way allowing the platform to handle the data without setbacks; separating messy data from the main entities into their designated attributes for proper handling.</li>
+                    <li>Proper insertion of data: Creating a script to properly insert the data, being mindful of table relationships and keys, as well as the creation of joint tables to support the relationships designated in the previous stage. Moreover, the generation of additional attributes such as IDs for easier tracking on later stages was also key for the overall correctness of the project.</li>
+                    <li>Creation of queries and triggers: Developing efficient SQL queries and implementing database triggers to automate certain operations and maintain data integrity as requested. Additionally, each query adn trigger was paired with their verification so as to ensure their functionality.</li>
+               </ul>
+            ''',
             "tags": ["MySQL", "Data Cleaning", "Data Analysis"],
+            "link": "#"
+        },
+        {
+            "title": "Machine Learning - UraniaEr@vna - Galaxy Morphology Classification System",
+            "description": "Development of a machine learning system for classifying galaxy morphologies.",
+            "details": '''
+               <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technologies:</span> Autoencoder, Convolutional Neural Networks (CNNs), K-Means Clustering, Gradient Boosting Classifier, FITS Files, StandardScaler, Streamlit, TensorFlow, scikit-learn, Astropy, Early Stopping, Multi-Input Neural Networks, Redshift Prediction.</p>
+
+               <p>This project implements an automated galaxy classification pipeline that processes astronomical FITS images and metadata to predict both morphological type and redshift. The system employs an unsupervised convolutional autoencoder to compress 64x64 galaxy images into 128-dimensional visual fingerprints, which are then combined with CAS morphological parameters, Sérsic index, and bulge-to-total ratio to create a 133-dimensional feature vector.</p>
+
+               <p>K-Means clustering generates pseudo-labels for six galaxy types (Elliptical, Spiral, Barred Spiral, Lenticular, Edge-On, Irregular), which a Gradient Boosting Classifier learns to reproduce with 0.95 accuracy. A separate multi-input CNN simultaneously predicts redshift values using both image data and Sérsic index. The complete pipeline is deployed as an interactive Streamlit web application allowing users to upload FITS files, visualize galaxies with adjustable colormaps and stretches, and download professional-formatted PDF reports.</p>
+
+               <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Key Implementation Phases:</span></p>
+               <ul class="fancy-list">
+                   <li>Data acquisition and preprocessing: Downloaded the COSMOS dataset with 100,000 FITS files and implemented a loader to read images, apply background subtraction and log scaling, resize to 64x64, and extract CAS parameters, Sérsic index, and BTT values from catalog metadata.</li>
+                   <li>Model development and training: Built an autoencoder for 128-dimensional feature extraction, ran K-Means clustering on combined feature vectors, applied rule-based label mapping using BTT and Sérsic thresholds, trained a Gradient Boosting Classifier achieving 0.95 accuracy, and developed a multi-input CNN for redshift prediction.</li>
+                   <li>Evaluation and analysis: Assessed classifier performance through confusion matrices and confidence histograms, evaluated redshift CNN with MAE of 1.459 and negative R² of -0.645, visualized feature space separation via PCA, and verified cluster averages matched known astronomical properties.</li>
+                   <li>Application deployment and integration: Built a Streamlit web interface with four interactive tabs, implemented backend model loading and real-time visualization with adjustable colormaps, generated downloadable PDF reports with professional branding, and added error handling for robust user experience.</li>
+               </ul>
+
+               <p><span class="accent-highlight" style='font-weight:700; color: #771F02;'>Core Technical Highlights &amp; Engineering Challenges:</span></p>
+               <ul class="fancy-list">
+                    <li>Unsupervised classification without ground truth labels: The COSMOS dataset lacks morphological labels, requiring an innovative pipeline combining autoencoder feature extraction, K-Means clustering for pseudo-labels, and heuristic rule-based mapping using BTT and Sérsic index, achieving 0.95 classifier accuracy despite no manually labeled data, though this reflects agreement with K-Means rather than true astronomical truth.</li>
+                    <li>Multi-modal feature integration for galaxy characterization: Heterogeneous data types including visual pixels, CAS parameters, Sérsic index, and BTT were combined into a 133-dimensional vector using StandardScaler to harmonize different numerical ranges, with PCA visualization confirming clear separation between morphological types in feature space.</li>
+                    <li>Computational constraints and training optimization: Processing thousands of FITS files on Google Colab required binary serialization to save preprocessed data and avoid repeated I/O operations, while a simplified 1,000-sample backend enabled rapid debugging, yet the redshift CNN still performed poorly due to the difficulty of photometric redshift estimation from low-resolution single-band images.</li>
+               </ul>
+            ''',
+            "tags": ["Python", "Machine Learning", "Clustering", "Tensorflow", "Autoencoders", "UI"],
             "link": "#"
         }
     ]
